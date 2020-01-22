@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="faq" template="/tiles/layout.jsp">
+		<put-attribute name="title" value="FAQ" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter-board.jsp" />
+		<put-attribute name="body" value="/faq/faqList.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<!-- 글목록 -->
+	<definition name="faqList" extends="faq">
+		<put-attribute name="title" value="자주묻는질문" />
+		<put-attribute name="body" value="/faq/faqList.jsp" />
+	</definition>	
+	
+	<!-- 글작성  -->
+	<definition name="faqWriteForm" extends="faq">
+		<put-attribute name="body" value="/faq/faqWrite.jsp" />
+	</definition>
+	
+	<!-- 글상세보기 -->
+	<definition name="faqDetail" extends="faq">
+		<put-attribute name="body" value="/faq/faqDetail.jsp" />
+	</definition>
+	
+	
+	 <!--글수정 -->
+	<definition name="faqModifyForm" extends="faq">
+		<put-attribute name="body" value="/faq/faqModify.jsp" />
+	</definition>
+
+	
+</tiles-definitions>

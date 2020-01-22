@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+	<package name="notice" extends="struts-default, tiles-default">
+		
+		<action name="noticeList" class="notice.noticeListAction" method="execute">
+			<result type="tiles">noticeList</result>
+		</action>
+
+		<!--  공지사항 글쓰기 액션 -->
+		<action name="noticeWriteForm" class="notice.noticeWriteAction" method="form">
+			<result type="tiles">noticeWriteForm</result>
+		</action>
+		
+		<action name="noticeWriteAction" class="notice.noticeWriteAction">
+			<result type="redirect-action">
+				<param name="actionName">noticeList</param>
+			</result>
+		</action>
+		
+		<!-- 게시판 글 상세보기 액션 -->
+		<action name="noticeDetail" class="notice.noticeDetailAction">
+			<result type="tiles">noticeDetail</result>
+		</action>
+		
+		
+		<!--  게시판 수정 액션 -->
+		<action name="noticeModify" class="notice.noticeDetailAction">
+			<result type="chain">noticeModifyForm</result>
+		</action>
+		
+		<action name="noticeModifyForm" class="notice.noticeModifyAction" method="form">
+			<result type="tiles">noticeModifyForm</result>
+		</action>
+		
+		<action name="noticeModifyAction" class="notice.noticeModifyAction">
+			<result type="redirect-action">
+				<param name="actionName">noticeList</param>
+			</result>
+		</action>
+		
+		 <!-- 게시판 삭제 액션 --> 
+		<action name="noticeDelete" class="notice.noticeDeleteAction">
+			<result type="redirect-action">
+				<param name="actionName">noticeList</param>
+				</result>
+		</action>
+	
+	</package>	
+</struts>
+ 

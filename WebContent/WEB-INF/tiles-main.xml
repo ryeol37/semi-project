@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="main" template="/tiles/layout.jsp">
+		<put-attribute name="title" value="Charlie" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="body" value="/tiles/body/body.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<definition name="intro" template="/tiles/layout.jsp"> 
+	 	<put-attribute name="title" value="Charlie" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="body" value="/tiles/body/intro.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter-intro.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />	
+	</definition>	
+	
+	<definition name="map" extends="intro">
+		<put-attribute name="body" value="/tiles/body/map.jsp" />
+	</definition>		
+	
+	<definition name="siteMap" template="/tiles/layout2.jsp">
+	    <put-attribute name="title" value="Charlie" />
+	    <put-attribute name="header" value="/tiles/header/header.jsp" />
+	    <put-attribute name="body" value="/tiles/body/siteMap.jsp"/>
+	    <put-attribute name="footer" value="/tiles/footer/footer.jsp" />	
+	</definition> 
+	
+	
+</tiles-definitions>
+
+

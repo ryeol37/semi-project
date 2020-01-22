@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+	<package name="needbook" extends="struts-default, tiles-default">
+		
+		<action name="needbookList" class="needbook.needbookListAction" method="execute">
+			<result type="tiles">needbookList</result>
+		</action>
+
+		<!-- 게시판 글쓰기 액션 -->
+		<action name="needbookWriteForm" class="needbook.needbookWriteAction" method="form">
+			<result type="tiles">needbookWriteForm</result>
+		</action>
+		
+		<action name="needbookWriteAction" class="needbook.needbookWriteAction">
+			<result type="redirect-action">
+				<param name="actionName">needbookList</param>
+			</result>
+		</action>
+		
+		<!-- 게시판 글 상세보기 액션 -->
+		<action name="needbookDetail" class="needbook.needbookDetailAction">
+			<result type="tiles">needbookDetail</result>
+		</action>
+		
+		
+		<!-- 게시판 수정 액션 -->
+		<action name="needbookModify" class="needbook.needbookDetailAction">
+			<result type="chain">needbookModifyForm</result>
+		</action>
+		
+		<action name="needbookModifyForm" class="needbook.needbookModifyAction" method="form">
+			<result type="tiles">needbookModifyForm</result>
+		</action>
+		
+		<action name="needbookModifyAction" class="needbook.needbookModifyAction">
+			<result type="redirect-action">
+				<param name="actionName">needbookList</param>
+			</result>
+		</action>
+		
+		<!-- 게시판 삭제 액션 -->
+		<action name="needbookDelete" class="needbook.needbookDeleteAction">
+			<result type="redirect-action">
+				<param name="actionName">needbookList</param>
+				</result>
+		</action>
+	
+	</package>
+		
+	
+		<!-- 게시판 답변글쓰기 액션 -->
+<!-- 		<action name="boardReplyForm" class="board." method="reply">
+			<result type="chain">boardWriteForm</result>
+		</action> -->
+		
+		<!-- <action name="boardReply" class="board.">
+			<result type="redirect-action">
+				<param name="actionName">boardList</param>
+			</result>
+		</action> -->
+		
+</struts>
+ 

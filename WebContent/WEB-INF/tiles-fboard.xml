@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="fboard" template="/tiles/layout.jsp">
+		<put-attribute name="title" value="게시판" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter-board.jsp" />
+		<put-attribute name="body" value="/fboard/fboard.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<!-- 글목록 -->
+	<definition name="fboardList" extends="fboard">
+		<put-attribute name="body" value="/fboard/fboardList.jsp" />
+	</definition>	
+	
+	<!-- 글작성 -->
+	<definition name="fboardWriteForm" extends="fboard">
+		<put-attribute name="body" value="/fboard/fboardWrite.jsp" />
+	</definition>
+	
+	<!-- 글수정 -->
+	<definition name="fboardModifyForm" extends="fboard">
+		<put-attribute name="body" value="/fboard/fboardModify.jsp" />
+	</definition>
+
+	<!-- 글상세보기 -->
+	<definition name="fboardDetail" extends="fboard">
+		<put-attribute name="body" value="/fboard/fboardDetail.jsp" />
+	</definition>
+	
+</tiles-definitions>

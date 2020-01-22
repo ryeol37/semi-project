@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="fboard" extends="struts-default, tiles-default">
+		
+		<action name="fboardList" class="fboard.fboardListAction">
+			<result type="tiles">fboardList</result>
+		</action>
+		<!-- 게시판 글쓰기 액션 -->
+		<action name="fboardWriteForm" class="fboard.fboardWriteAction" method="form">
+			<result type="tiles">fboardWriteForm</result>
+		</action>
+		
+		<action name="fboardWriteAction" class="fboard.fboardWriteAction">
+			<result type="redirect-action">
+				<param name="actionName">fboardList</param>
+			</result>
+		</action>
+		
+		<!-- 게시판 글 상세보기 액션 -->
+		<action name="fboardDetail" class="fboard.fboardDetailAction">
+			<result type="tiles">fboardDetail</result>
+		</action>
+		
+		<!-- 게시글 좋아요 액션 -->
+		<action name="fboardLikeAction" class="fboard.fboardLikeAction">
+			<result type="redirect-action">
+			<param name="actionName">fboardList</param>			
+			</result>
+		</action>
+		
+		<!-- 게시판 수정 액션 -->
+		<action name="fboardModify" class="fboard.fboardDetailAction">
+			<result type="chain">fboardModifyForm</result>
+		</action>
+		
+		<action name="fboardModifyForm" class="fboard.fboardModifyAction" method="form">
+			<result type="tiles">fboardModifyForm</result>
+		</action>
+		
+		<action name="fboardModifyAction" class="fboard.fboardModifyAction">
+			<result type="redirect-action">
+				<param name="actionName">fboardList</param>
+			</result>
+		</action>
+		
+		<!-- 게시판 삭제 액션 -->
+		<action name="fboardDelete" class="fboard.fboardDeleteAction">
+			<result type="redirect-action">
+				<param name="actionName">fboardList</param>
+				</result>
+		</action>
+		
+		<!-- 게시판 댓글 쓰기 액션 -->
+		<action name="commentWrite" class="fboard.commentWriteAction">
+		<result type="chain">fboardDetail</result>
+		</action>
+		
+		<!-- 게시판 댓글 삭제 액션 -->
+		<action name="commentDelete" class="fboard.commentDeleteAction">
+		<result type="chain">fboardDetail</result>
+		</action>
+	
+	</package>
+		
+</struts>
+ 

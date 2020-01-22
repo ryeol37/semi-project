@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="fboard">
+	<typeAlias alias="fboard" type="fboard.fboardVO" />
+	<typeAlias alias="comment" type="fboard.cboardVO"/>
+
+	<resultMap id="boardRes" class="fboard">
+
+		<result property="fb_no" column="fb_no" />
+		<result property="m_id" column="m_id" />
+		<result property="fb_subject" column="fb_subject" />
+		<result property="fb_readhit" column="fb_readhit" />
+		<result property="fb_content" column="fb_content" />
+		<result property="fb_regdate" column="fb_regdate" />
+	    <result property="fb_like" column="fb_like" />
+	</resultMap>
+	
+	<resultMap id="commentRes" class="comment">
+		<result property="c_no" column="c_no" />
+		<result property="fb_no" column="fb_no" />
+		<result property="m_id" column="m_id" />
+		<result property="c_content" column="c_content" />
+		<result property="c_regdate" column="c_regdate" />
+	</resultMap>
+	
+
+	<sql id="select-all">
+		SELECT * FROM FREEBOARD
+	</sql>
+	
+	<sql id="select-com">
+	    SELECT * FROM CBOARD
+	</sql>
+
+	<sql id="where-no">
+		where fb_no=#fb_no#
+	</sql>
+	
+	<sql id="where-comno">
+		where c_no=#c_no#
+	</sql>
+	
+
+	<select id="selectAll" resultMap="boardRes" parameterClass="int">
+		SELECT * FROM FREEBOARD
+		order by fb_no desc
+	</select>
+	
+	<select id="commentSelectAll" resultMap="commentRes" parameterClass="int">
+		SELECT * FROM CBOARD
+		 WHERE fb_no = #c_no#
+		 ORDER BY c_no DESC
+	</select>
+	
+
+	<select id="selectOne" resultMap="boardRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-no" />
+	</select>
+	
+	<select id="comSelectOne" resultMap="commentRes" parameterClass="int">
+		select * from CBOARD
+		<include refid="where-comno" />
+	</select>
+	
+	<select id="selectLastNo" resultClass="fboard" parameterClass="int">
+			SELECT max(fb_no) as fb_no FROM FREEBOARD 
+	</select>
+	
+		<select id="fboard" resultMap="boardRes" parameterClass="fboard">
+		<include refid="select-all" />
+		ORDER BY fb_no DESC
+	</select>
+
+	<!-- 검색 -->
+	<select id="selectSearchM" resultMap="boardRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE MEMBER_ID like #searchKeyword#
+		ORDER BY fb_no DESC
+	</select>
+
+	<select id="selectSearchT" resultMap="boardRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE title like #searchKeyword#
+		ORDER BY fb_no DESC
+	</select>
+
+	<select id="selectSearchC" resultMap="boardRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE content like #searchKeyword#
+		ORDER BY fb_no DESC
+	</select>
+	
+	<!-- 글 등록 -->
+	<insert id="insertBoard" parameterClass="fboard">
+		INSERT INTO FREEBOARD
+		(
+		FB_NO,
+		M_ID, 
+		FB_SUBJECT,
+		FB_CONTENT,
+		FB_REGDATE
+		)
+		VALUES (
+		FREEBOARD_NO_SEQ.NEXTVAL,
+		#m_id#,
+		#fb_subject#,
+		#fb_content#,
+		sysdate
+		)
+	</insert>
+	
+	<insert id="insertComment" parameterClass="comment">
+		INSERT INTO CBOARD(
+		C_NO,
+		M_ID,
+		FB_NO,
+		C_CONTENT,
+		C_REGDATE
+		)
+		VALUES (
+		CBOARD_NO_SEQ.NEXTVAL,
+		#m_id#,
+		#fb_no#,
+		#c_content#,
+		sysdate
+		)
+	</insert>
+	
+	<update id="updateBoard" parameterClass="fboard">
+    		UPDATE FREEBOARD SET FB_SUBJECT = #fb_subject#,
+                       		     FB_CONTENT = #fb_content#
+		<include refid="where-no" />
+   	</update>
+
+	<update id="updateRedhit" parameterClass="fboard">
+		UPDATE FREEBOARD SET FB_READHIT = fb_readhit + 1
+		<include refid="where-no" />
+	</update>
+	
+	<!-- 좋아요 추천 기능 -->
+	<update id="updateLike" parameterClass="fboard">
+		UPDATE FREEBOARD SET FB_LIKE = fb_like + 1		
+		<include refid="where-no" />
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard" parameterClass="fboard">
+			DELETE FROM FREEBOARD 
+			<include refid="where-no" />
+	</delete>
+	
+	<delete id="deleteComment" parameterClass="comment">
+		DELETE FROM CBOARD
+		<include refid="where-comno" />
+	</delete>
+	
+	
+</sqlMap>

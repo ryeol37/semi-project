@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="needbook">
+	<typeAlias alias="needbook" type="needbook.needbookVO" />
+
+	<resultMap id="needbookRes" class="needbook">
+
+		<result property="nb_no" column="nb_no" />
+		<result property="m_id" column="m_id" />
+		<result property="nb_subject" column="nb_subject" />
+		<result property="nb_readhit" column="nb_readhit" />
+		<result property="nb_content" column="nb_content" />
+		<result property="nb_regdate" column="nb_regdate" />
+	</resultMap>
+
+	<sql id="select-all">
+		SELECT * FROM NEEDBOOK
+	</sql>
+
+	<sql id="where-no">
+		where nb_no=#nb_no#
+	</sql>
+
+	<select id="selectAll" resultMap="needbookRes">
+		<include refid="select-all"></include>
+		order by nb_no desc
+	</select>
+
+	<select id="selectOne" resultMap="needbookRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-no" />
+	</select>
+	
+	<select id="selectLastNo" resultClass="needbook" parameterClass="int">
+			SELECT max(nb_no) as nb_no FROM NEEDBOOK
+	</select>
+	
+		<select id="needbook" resultMap="needbookRes" parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY nb_no DESC
+	</select>
+	
+	<select id="selectneedbook" resultMap="needbookRes" parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY nb_no DESC
+	</select>
+	
+
+	<!-- 검색 -->
+	<select id="selectSearchM" resultMap="needbookRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE m_id like #searchKeyword#
+		ORDER BY nb_no DESC
+	</select>
+
+	<select id="selectSearchT" resultMap="needbookRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE nb_subject like #searchKeyword#
+		ORDER BY nb_no DESC
+	</select>
+
+	<select id="selectSearchC" resultMap="needbookRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE nb_content like #searchKeyword#
+		ORDER BY nb_no DESC
+	</select>
+	
+	<insert id="insertBoard" parameterClass="needbook">
+		INSERT INTO NEEDBOOK
+		(
+		NB_NO,
+		M_ID,
+		NB_SUBJECT,
+		NB_CONTENT,
+		NB_REGDATE
+		)
+		VALUES (
+		NEEDBOOK_NO_SEQ.NEXTVAL,
+		#m_id#,
+		#nb_subject#,
+		#nb_content#,
+		sysdate
+		)
+	</insert>
+
+	<update id="updateBoard" parameterClass="needbook">
+    		UPDATE NEEDBOOK SET NB_SUBJECT = #nb_subject#,
+                       		     NB_CONTENT = #nb_content#
+		<include refid="where-no" />
+   	</update>
+
+	<update id="updateReadhit" parameterClass="needbook">
+		UPDATE NEEDBOOK SET NB_READHIT = nb_readhit + 1
+		<include refid="where-no" />
+	</update>
+	
+	<delete id="deleteBoard" parameterClass="needbook">
+			DELETE FROM NEEDBOOK 
+			<include refid="where-no" />
+	</delete>
+	
+</sqlMap>

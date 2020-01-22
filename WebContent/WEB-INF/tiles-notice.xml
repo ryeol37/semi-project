@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="notice" template="/tiles/layout.jsp">
+		<put-attribute name="title" value="공지사항" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter-intro.jsp" />
+		<put-attribute name="body" value="/notice/noticeList.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<!-- 글목록 -->
+	<definition name="noticeList" extends="notice">
+		<put-attribute name="body" value="/notice/noticeList.jsp" />
+	</definition>	
+	
+	 <!-- 글작성  -->
+	<definition name="noticeWriteForm" extends="notice">
+		<put-attribute name="body" value="/notice/noticeWrite.jsp" />
+	</definition>
+	
+	<!-- 글수정  -->
+	<definition name="noticeModifyForm" extends="notice">
+		<put-attribute name="body" value="/notice/noticeModify.jsp" />
+	</definition>
+
+	<!-- 글상세보기 -->
+	<definition name="noticeDetail" extends="notice">
+		<put-attribute name="body" value="/notice/noticeDetail.jsp" />
+	</definition>
+	
+</tiles-definitions>

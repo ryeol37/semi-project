@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+ 	
+	<definition name="join" template="/tiles/layout2.jsp">
+		<put-attribute name="title" value="join" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="body" value="/member/joinForm.jsp" />		
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<definition name="joinForm" extends="join">
+		<put-attribute name="body" value="/member/joinForm.jsp" />		
+	</definition>
+	
+	<definition name="joinAgree" extends="join">
+		<put-attribute name="body" value="/member/joinAgree.jsp" />		
+	</definition>
+	<definition name="confirmId" template="/tiles/mini_layout.jsp">
+		<put-attribute name="title" value="newPopup" />
+		<put-attribute name="body" value="/member/confirmId.jsp" />
+	</definition>
+	
+	<definition name="confirmEmail" template="/tiles/mini_layout.jsp">
+	<put-attribute name="title" value="newPopup" />
+		<put-attribute name="body" value="/member/confirmEmail.jsp" />
+	</definition>
+	
+	<definition name="joinSuccess" extends="join">
+		<put-attribute name="body" value="/member/joinSuccess.jsp" />
+					
+	</definition>	
+	
+	<!-- 
+	
+	
+	
+	
+
+	<definition name="joinError" extends="join">
+		<put-attribute name="body" value="/member/joinError.jsp" />
+	</definition>
+	
+	<definition name="joinModify" extends="join">
+		<put-attribute name="body" value="/member/joinModify.jsp" />
+	</definition>
+	
+	<definition name="main-join2" template="/tiles/layout2.jsp">
+		<put-attribute name="title" value="Charlie" />
+		<put-attribute name="body" value="/member/joinForm.jsp" />		
+	</definition>
+	 -->
+	
+
+</tiles-definitions>

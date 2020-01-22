@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="faq">
+	<typeAlias alias="faq" type="faq.faqVO" />
+
+	<resultMap id="faqRes" class="faq">
+
+		<result property="f_no" column="f_no" />
+		<result property="f_subject" column="f_subject" />
+		<result property="f_readhit" column="f_readhit" />
+		<result property="f_content" column="f_content" />
+		<result property="f_regdate" column="f_regdate" />
+	</resultMap>
+
+	<sql id="select-all">
+		SELECT * FROM FAQBOARD
+	</sql>
+
+	<sql id="where-no">
+		where f_no=#f_no#
+	</sql>
+
+	<select id="selectAll" resultMap="faqRes" parameterClass="int">
+		SELECT
+		* FROM FAQBOARD
+		order by f_no desc
+	</select>
+
+	<select id="selectOne" resultMap="faqRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-no" />
+	</select>
+
+	<select id="selectLastNo" resultClass="faq" parameterClass="int">
+		SELECT max(f_no) as f_no FROM FAQBOARD
+	</select>
+
+	<select id="faq" resultMap="faqRes" parameterClass="faq">
+		<include refid="select-all" />
+		ORDER BY f_no DESC
+	</select>
+
+	<!-- 검색 <select id="selectSearchT" resultMap="faqRes" parameterClass="string"> 
+		<include refid="select-all" /> WHERE title like #searchKeyword# ORDER BY 
+		f_no DESC </select> <select id="selectSearchC" resultMap="faqRes" parameterClass="string"> 
+		<include refid="select-all" /> WHERE content like #searchKeyword# ORDER BY 
+		f_no DESC </select> -->
+
+	<insert id="insertFaq" parameterClass="faq">
+		INSERT INTO FAQBOARD
+		(
+		F_NO,
+		F_SUBJECT,
+		F_CONTENT,
+		F_REGDATE
+		)
+		VALUES (
+		FAQ_NO_SEQ.NEXTVAL,
+		#f_subject#,
+		#f_content#,
+		sysdate
+		)
+	</insert>
+
+	<update id="updateFaq" parameterClass="faq">
+		UPDATE FAQBOARD SET
+		F_SUBJECT = #f_subject#,
+		F_CONTENT = #f_content#
+		<include refid="where-no" />
+	</update>
+
+	<update id="updateReadhit" parameterClass="faq">
+		UPDATE FAQBOARD SET F_READHIT = f_readhit + 1
+		<include refid="where-no" />
+	</update>
+
+	<delete id="deleteFaq" parameterClass="faq">
+		DELETE FROM FAQBOARD
+		<include refid="where-no" />
+	</delete>
+
+</sqlMap>

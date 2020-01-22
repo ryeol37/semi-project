@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+ 	
+	<definition name="myPage" template="/tiles/layout.jsp">
+		<put-attribute name="title" value="myPage" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter-mypage.jsp" />
+		<put-attribute name="body" value="/mypage/memberModify.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<definition name="myPageModify" extends="myPage">
+		<put-attribute name="body" value="/mypage/memberModify.jsp" />
+	</definition>
+	
+	<definition name="myRentList" extends="myPage">
+	    <put-attribute name="body" value="/mypage/myRentList.jsp"/>
+	</definition>
+	
+	<definition name="viewAction" template="/tiles/layout-left.jsp">
+		<put-attribute name="title" value="책검색" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter-mypage.jsp" />
+		<put-attribute name="body" value="/mypage/myRentList.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<definition name="memberDeleteForm"  extends="myPage">
+		<put-attribute name="body" value="/mypage/memberDelete.jsp" />
+	</definition>
+	
+	<!-- 
+	<definition name="myPageBookList" extends="myPage">
+		<put-attribute name="body" value="/mypage/myPageBookList.jsp" />
+	</definition>
+	
+	<definition name="memberDeleteForm"  extends="myPage">
+		<put-attribute name="body" value="/mypage/memberDelete.jsp" />
+	</definition>
+	
+	<definition name="myWrote" extends="myPage">
+		<put-attribute name="title" value="내가 쓴 글 확인" />
+		<put-attribute name="body" value="/mypage/myWroteForm.jsp" />
+	</definition>
+	
+	<definition name="myRentList" extends="myPage">
+		<put-attribute name="title" value="대출 내역" />
+		<put-attribute name="body" value="/mypage/myRentList.jsp" />
+	</definition>
+	
+	<definition name="myReserveList" extends="myPage">
+		<put-attribute name="title" value="대출 내역" />
+		<put-attribute name="body" value="/mypage/myReserveList.jsp" />
+	</definition>
+	
+	<definition name="myPageBookInclude" extends="myPage">
+      <put-attribute name="title" value="내 서재 담기" />
+      <put-attribute name="body" value="/mypage/myPageBookList.jsp" />
+   </definition> -->
+	
+</tiles-definitions>

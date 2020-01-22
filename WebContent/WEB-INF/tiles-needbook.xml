@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="needbook" template="/tiles/layout.jsp">
+		<put-attribute name="title" value="도서신청게시판" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="lefter" value="/tiles/lefter/lefter-board.jsp" />
+		<put-attribute name="body" value="/needbook/needbookList.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<!-- 글목록 -->
+	<definition name="needbookList" extends="needbook">
+		<put-attribute name="body" value="/needbook/needbookList.jsp" />
+	</definition>	
+	
+	<!-- 글작성 -->
+	<definition name="needbookWriteForm" extends="needbook">
+		<put-attribute name="body" value="/needbook/needbookWrite.jsp" />
+	</definition>
+	
+	<!-- 글수정 -->
+	<definition name="needbookModifyForm" extends="needbook">
+		<put-attribute name="body" value="/needbook/needbookModify.jsp" />
+	</definition>
+
+	<!-- 글상세보기 -->
+	<definition name="needbookDetail" extends="needbook">
+		<put-attribute name="body" value="/needbook/needbookDetail.jsp" />
+	</definition>
+	
+</tiles-definitions>

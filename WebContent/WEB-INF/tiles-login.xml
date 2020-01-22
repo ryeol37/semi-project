@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="login" template="/tiles/layout2.jsp">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="header" value="/tiles/header/header.jsp" />
+		<put-attribute name="body" value="/login/loginForm.jsp" />
+		<put-attribute name="footer" value="/tiles/footer/footer.jsp" />
+	</definition>
+	
+	<definition name="loginError" extends="login">
+		<put-attribute name="title" value="로그인 에러" />
+		<put-attribute name="body" value="/login/loginError.jsp" />
+	</definition>
+	
+	<definition name="findIdForm" extends="login">
+		<put-attribute name="title" value="아이디 찾기" />
+		<put-attribute name="body" value="/login/findIdForm.jsp" />
+	</definition>
+	
+	<definition name="findPwForm" extends="login">
+		<put-attribute name="title" value="비밀번호 찾기" />
+		<put-attribute name="body" value="/login/findPwForm.jsp" />
+	</definition>
+	
+	<definition name="findError" extends="login">
+		<put-attribute name="title" value="아이디/비밀번호 찾기 에러" />
+		<put-attribute name="body" value="/login/findError.jsp" />
+	</definition>
+	
+	<definition name="findIdSuccess" extends="login">
+		<put-attribute name="title" value="아이디 찾기 성공" />
+		<put-attribute name="body" value="/login/findIdSuccess.jsp" />
+	</definition>
+	
+	<definition name="findPwSuccess" extends="login">
+		<put-attribute name="title" value="비밀번호 찾기 성공" />
+		<put-attribute name="body" value="/login/findPwSuccess.jsp" />
+	</definition>
+	
+	<definition name="loginRequest" extends="login">
+		<put-attribute name="title" value="로그인 요청" />
+		<put-attribute name="body" value="/login/loginRequest.jsp" />
+	</definition>
+	
+</tiles-definitions>

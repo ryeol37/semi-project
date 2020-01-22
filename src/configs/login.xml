@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 용량제한 100MB로 설정. <constant name="struts.multipart.maxSize" value="104857600" 
+		/> -->
+	<package name="login" extends="struts-default, tiles-default">
+		
+		<action name="checkIdAction" class="login.checkIdAction" method="checkId">
+		    <result name="success" type="redirect-action">
+		    <param name="actionName">mainAction</param>
+			</result>
+			<result name="error" type="tiles">loginError</result>
+		</action>
+		
+		<action name="logout" class="login.checkIdAction" method="logout">
+			<result name="success" type="redirect-action">
+			<param name="actionName">mainAction</param>
+			</result>
+		</action>
+		
+		<action name="findIdForm" class="login.findAction" method="form">
+			<result name="success" type="tiles">findIdForm</result>
+		</action>
+		
+		<action name="findId" class="login.findAction" method="findId">
+			<result name="success" type="tiles">findIdSuccess</result>
+			<result name="error" type="tiles">findError</result>
+		</action>
+		
+		<action name="findPwForm" class="login.findAction" method="form">
+			<result name="success" type="tiles">findPwForm</result>
+		</action>
+		
+		<action name="findPw" class="login.findAction" method="findPw">
+			<result name="success" type="tiles">findPwSuccess</result>
+			<result name="error" type="tiles">findError</result>
+		</action>
+		
+		<action name="loginRequest" class="login.loginAction" method="loginRequest">
+			<result name="success" type="tiles">loginRequest</result>
+		</action>		
+
+	</package>
+	
+</struts>

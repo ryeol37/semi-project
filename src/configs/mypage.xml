@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="mypage" extends="struts-default, tiles-default">
+
+		<action name="memberModifyAction" class="mypage.memberModifyAction">
+			<result type="redirect-action">
+			<param name="actionName">mainAction</param>
+			</result>
+		</action>
+		
+ 		<action name="viewAction" class="mypage.viewAction">
+		<result type="tiles">viewAction</result>
+		</action>
+		
+		<action name="myRentList" class="mypage.myRentAction">
+		<result type="tiles">myRentList</result>
+		</action>
+		
+		<action name="myDeleteForm" class="mypage.memberDeleteAction" method="form">
+		<result type="tiles">memberDeleteForm</result>
+		</action>
+		
+		<action name="memberDeleteAction" class="mypage.memberDeleteAction">
+		<result type="redirect-action">
+		<param name="actionName">mainAction</param>
+		</result>
+		</action>
+
+<!--         <action name="myRentExtendAction" class="mypage.MyRentAction" method="rentExtend">
+			<result type="redirect-action">
+				<param name="actionName">myRentList</param>
+			</result>
+		</action> -->
+
+		<action name="myRentReturnAction" class="mypage.myRentAction" method="rentReturn">
+			<result type="redirect-action">
+				<param name="actionName">myRentList</param>
+			</result>
+		</action>
+
+<!-- 		<action name="myReserveList" class="mypage.MyReserveAction">
+			<result type="tiles">myReserveList</result>
+		</action>
+		
+		<action name="myReserveReturnAction" class="mypage.MyReserveAction" method="reserveReturn">
+			<result type="redirect-action">
+				<param name="actionName">myReserveList</param>
+			</result>
+		</action>
+		
+		<action name="myPageBookInclude" class="mypage.BookIncludeAction">
+			<result type="chain">bookView</result>
+		</action>
+		
+		<action name="myBookDeleteAction" class="mypage.MyPageBookListAction" method="delete">
+			<result type="redirect-action">
+				<param name="actionName">myPageBookList</param>
+			</result>
+		</action> -->
+	</package>
+</struts>

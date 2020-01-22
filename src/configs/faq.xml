@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+
+<struts>
+	<package name="faq" extends="struts-default, tiles-default">
+
+
+		<!-- 자주묻는 질문 목록 -->
+		<action name="faqList" class="faq.faqListAction" method="execute">
+			<result type="tiles">faqList</result>
+		</action>
+
+
+		<!-- 자주묻는질문 등록 -->
+		<action name="faqWriteForm" class="faq.faqWriteAction" method="form">
+			<result type="tiles">faqWriteForm</result>
+		</action>
+
+		<action name="faqWriteAction" class="faq.faqWriteAction">
+			<result type="chain">faqList
+			</result>
+		</action>
+
+
+		<!-- 자주묻는질문 상세보기 액션 -->
+		<action name="faqDetail" class="faq.faqDetailAction">
+			<result type="tiles">faqDetail</result>
+		</action>
+
+
+
+		<!-- 자주묻는질문 수정 액션 -->
+		<action name="faqModify" class="faq.faqDetailAction">
+			<result type="chain">faqModifyForm</result>
+		</action>
+
+		<action name="faqModifyForm" class="faq.faqModifyAction"
+			method="form">
+			<result type="tiles">faqModifyForm</result>
+		</action>
+
+		<action name="faqModifyAction" class="faq.faqModifyAction">
+			<result type="redirect-action">
+				<param name="actionName">faqList</param>
+			</result>
+		</action>
+
+		<!-- 게시판 삭제 액션 -->
+		<action name="faqDelete" class="faq.faqDeleteAction">
+			<result type="redirect-action">
+				<param name="actionName">faqList</param>
+			</result>
+		</action>
+
+
+	</package>
+</struts>
+ 

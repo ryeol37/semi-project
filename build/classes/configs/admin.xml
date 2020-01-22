@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<package name="admin" extends="struts-default, tiles-default">
+	
+	
+		<!-- 회원목록 -->
+		<action name="adminMemberListForm" class="adminMember.adminMemberList" method="form">
+			<result type="tiles">adminMemberList</result>
+		</action>
+		
+		<!--  회원 상세보기 -->
+		<action name="adminMemberDetailForm" class="adminMember.adminMemberList" method="detail">
+			<result type="tiles">adminMemberDetailForm</result>
+		</action>
+ 
+ 		<!-- 회원 삭제 -->
+		<action name="adminMemberDeleteAction" class="adminMember.adminMemberList" method="delete">
+			<result type="redirect-action">
+				<param name="actionName">adminMemberListForm</param>
+			</result>
+		</action>
+	
+	   <!--도서 목록 -->
+		<action name="adminBookList" class="adminBook.adminBookListAction">
+			<result type="tiles">adminBookList</result>
+		</action>
+		
+		<!-- 도서 상세보기 액션 -->
+		<action name="adminBookView" class="adminBook.adminBookViewAction">
+			<result type="tiles">adminBookView</result>
+		</action>
+	 	
+	 <!-- 	도서 등록  -->
+		 <action name="adminBookWriteForm" class="adminBook.adminBookWriteAction" method="form">
+			<result type="tiles">adminBookWriteForm</result>
+		</action>
+
+		<action name="adminBookWriteAction" class="adminBook.adminBookWriteAction">
+			<result type="redirect-action">
+				<param name="actionName">adminBookList</param>
+			</result>
+		</action> 
+		
+	
+ 
+		<!--도서 수정 액션-->	
+		<action name="adminBookModify" class="adminBook.adminBookViewAction">
+			<result type="chain">adminBookModifyForm</result>
+		</action>
+
+		<action name="adminBookModifyForm" class="adminBook.adminBookModifyAction" method="form">
+			<result type="tiles">adminBookModifyForm</result>
+		</action>
+
+		<action name="adminBookModifyAction" class="adminBook.adminBookModifyAction">
+			<result type="redirect-action">
+				<param name="actionName">adminBookList</param>
+			</result>
+		</action>
+	 
+		<!-- 도서 삭제 액션 -->
+		<action name="adminBookDelete" class="adminBook.adminBookDeleteAction">
+			<result type="redirect-action">
+				<param name="actionName">adminBookList</param>
+			</result>
+		</action>
+ 
+
+	</package>
+</struts>

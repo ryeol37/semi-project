@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="notice">
+	<typeAlias alias="notice" type="notice.noticeVO" />
+
+	<resultMap id="noticeRes" class="notice">
+
+		<result property="n_no" column="n_no" />
+		<result property="n_subject" column="n_subject" />
+		<result property="n_readhit" column="n_readhit" />
+		<result property="n_content" column="n_content" />
+		<result property="n_regdate" column="n_regdate" />
+	</resultMap>
+
+	<sql id="select-all">
+		SELECT * FROM NOTICEBOARD
+	</sql>
+
+	<sql id="where-no">
+		where n_no=#n_no#
+	</sql>
+
+	<select id="selectAll" resultMap="noticeRes">
+		SELECT * FROM NOTICEBOARD
+		order by n_no desc
+	</select>
+
+	<select id="selectOne" resultMap="noticeRes" parameterClass="int">
+		<include refid="select-all" />
+		<include refid="where-no" />
+	</select>
+	
+	<select id="selectLastNo" resultClass="notice" parameterClass="int">
+			SELECT max(n_no) as n_no FROM NOTICEBOARD
+	</select>
+	
+		<select id="notice" resultMap="noticeRes" parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY n_no DESC
+	</select>
+	
+	<select id="selectnotice" resultMap="noticeRes" parameterClass="int">
+		<include refid="select-all" />
+		ORDER BY n_no DESC
+	</select>
+	
+
+	<!-- 검색 -->
+	<select id="selectSearchM" resultMap="noticeRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE M_ID like #searchKeyword#
+		ORDER BY n_no DESC
+	</select>
+
+	<select id="selectSearchT" resultMap="noticeRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE n_subject like #searchKeyword#
+		ORDER BY n_no DESC
+	</select>
+
+	<select id="selectSearchC" resultMap="noticeRes" parameterClass="string">
+		<include refid="select-all" />
+		WHERE n_content like #searchKeyword#
+		ORDER BY n_no DESC
+	</select>
+	
+	 <insert id="insertNotice" parameterClass="notice">
+		INSERT INTO NOTICEBOARD
+		(
+		N_NO,
+		N_SUBJECT,
+		N_CONTENT,
+		N_REGDATE
+		)
+		VALUES (
+		NOTICEBOARD_NO_SEQ.NEXTVAL,
+		#n_subject#,
+		#n_content#,
+		sysdate
+		)
+	</insert>
+ 
+	<update id="updateNotice" parameterClass="notice"> 
+    		UPDATE NOTICEBOARD SET N_SUBJECT = #n_subject#,
+                       		     N_CONTENT = #n_content#
+		<include refid="where-no" />
+   	</update>
+
+	<update id="updateReadhit" parameterClass="notice">
+		UPDATE NOTICEBOARD SET N_READHIT = n_readhit + 1
+		<include refid="where-no" />
+	</update>
+	
+	<delete id="deleteNotice" parameterClass="notice">
+			DELETE FROM NOTICEBOARD 
+			<include refid="where-no" />
+	</delete>
+	
+</sqlMap>

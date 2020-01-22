@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC '-//ibatis.apache.org//DTD Sql Map 2.0//EN' 'http://ibatis.apache.org/dtd/sql-map-2.dtd'>
+<sqlMap namespace="login">
+
+	<typeAlias alias="login" type="login.loginVO" />
+	
+		<resultMap id="loginRes" class="login">
+		  	<result property="m_id" column="m_id"/>
+		  	<result property="m_pw" column="m_pw"/>
+           	<result property="m_no" column="m_no"/>
+           	<result property="m_name" column="m_name"/>
+           	<result property="m_jumin1" column="m_jumin1"/>
+           	<result property="m_jumin2" column="m_jumin2"/>
+           	<result property="m_email" column="m_email"/>
+           	<result property="m_phone" column="m_phone"/>
+           	<result property="m_zipcode" column="m_zipcode"/>
+           	<result property="m_addr1" column="m_addr1"/>
+           	<result property="m_addr2" column="m_addr2"/>
+           	<result property="m_isadmin" column="m_isadmin"/>
+		</resultMap>
+		
+		<sql id="select-all">
+			SELECT * FROM MEMBER
+		</sql>
+		
+		<!-- 공통으로 사용할 where-no 절 정의 -->
+		<sql id="where-no">
+			where M_ID=#m_id# and M_PW=#m_pw#
+		</sql>
+		
+		<!-- select 쿼리문 정의 -->
+		
+		<select id="selectAll" resultMap="loginRes">
+		SELECT * FROM MEMBER
+		</select>
+		
+		<select id="checkId" resultMap="loginRes" parameterClass="String">
+			SELECT * FROM MEMBER
+            where M_ID = #m_id#
+		</select>
+		
+		<select id="findId" resultMap="loginRes" parameterClass="login">
+			select * from member
+			where M_EMAIL=#m_email#
+		</select>
+		
+		<select id="findPw" resultMap="loginRes" parameterClass="login">
+			select * from member
+			where M_ID=#m_id# and M_EMAIL=#m_email#
+		</select>		
+		<select id="selectMemberOneBoard" resultMap="loginRes" parameterClass="login">
+		select * from member
+		where m_id = #m_id#
+		
+		</select>
+
+</sqlMap>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 용량제한 100MB로 설정. <constant name="struts.multipart.maxSize" value="104857600" 
+		/> -->
+	 <constant name="struts.i18n.encoding" value="euc-kr" /> 
+
+	<package name="main" extends="struts-default, tiles-default">
+		<action name="mainAction" class="main.MainAction">
+			<result name="success" type="tiles">main</result>
+		</action>
+		
+		<action name="myPage" class="mypage.myPageAction" >
+			<result name="success" type="tiles">myPage</result>
+		</action>
+		
+		<action name="loginForm" class="login.loginAction" method="form">
+			<result type="tiles">login</result>
+		</action>
+		
+		<action name="intro" class="main.MainAction">
+			<result type="tiles">intro</result>
+		</action>
+		
+		<action name="map" class="main.MainAction">
+			<result type="tiles">map</result>
+		</action>
+		
+		<action name="siteMap" class="main.MainAction">
+		    <result type="tiles">siteMap</result>
+		</action>
+		
+		<!-- 가입된 아이디가 맞는지 확인하는 액션 -->
+		<action name="loginMain" class="login.checkIdAction" method="checkId">
+			<result name="success" type="redirect-action">
+				<param name="actionName">mainAction</param>
+		</result>
+		</action>
+		
+		<!-- 회원가입 액션 -->
+		<action name="joinForm" class="member.joinAction" method="form">
+			<result name="success" type="tiles">join</result>
+		</action>
+	    	
+		<action name="noticeForm" class="notice.noticeListAction">
+		<result type="tiles">notice</result>
+		</action>
+		
+		<action name="faqForm" class="faq.faqListAction">
+		<result type="tiles">faq</result>
+		</action>
+		
+		<!-- 도서신청 글 관련 액션 -->
+		<action name="needbookForm" class="needbook.needbookListAction">
+		<result type="tiles">needbook</result>
+		</action>
+		
+		<!-- 책 검색 액션 -->
+		<action name="bookSearchForm" class="book.BookAction" method="form">
+			<result type="tiles">bookSearch</result>
+		</action>
+		
+		<!-- 관리자 관련 액션 -->
+		<action name="admin" class="admin.AdminAction">
+		<result type="tiles">admin</result>
+		</action>
+
+	</package>
+	<include file="/configs/join.xml" />
+	<include file="/configs/login.xml" />
+	<include file="/configs/fboard.xml" /> 
+	<include file="/configs/notice.xml" />
+	<include file="/configs/faq.xml" />
+	<include file="/configs/needbook.xml" />
+	<include file="/configs/mypage.xml" /> 
+	<include file="/configs/admin.xml" />
+	<include file="/configs/book.xml" />
+		
+</struts>
