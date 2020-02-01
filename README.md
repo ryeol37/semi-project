@@ -9,6 +9,3 @@
 * Language
  * JAVA
  * JSP
- * SERVLET
- * JAVASCRIPT
- * CSS
